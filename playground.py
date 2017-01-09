@@ -34,6 +34,17 @@ def check4dupe():
         
 def findsize():
     label1.config(text=listbox1.size())
+    
+def openfileR():
+    print "Open File r"
+
+def openfileW():
+    f = open("Readme.txt", 'w')
+    names = listbox1.get(0, END)
+    for i in names:
+        f.write(i+"\n")
+    f.close()
+
 
 
 root = Tk() #gives us a blank canvas object to work with
@@ -51,19 +62,57 @@ label1 = Label(root, text="don't be a little fucker", bg="pink", anchor=W)
 label1.grid(row=0, column=0, sticky=EW, columnspan=2)
 
 listbox1 = Listbox(root)
-listbox1.grid(row=2, column=0, columnspan=2, sticky=EW, rowspan=10)
+listbox1.grid(row=4, column=0, columnspan=2, sticky=EW, rowspan=10)
 listbox1. bind("<Button-1>", clearlist)
 
 listbox1.insert(END, "Ona", "is", "a", "boss", "ass", "bitch")
 
 findsize()
 
-image = Image.open("ball.jpg")
+
+
+
+
+
+
+
+
+
+
+
+image = Image.open("warp face.jpg")
+image.resize((50, 100))
 photo = ImageTk.PhotoImage(image)
 
 label2 = Label(image=photo)
 label2.image = photo # keep a reference!
 label2.grid(row=12, column=0)
+
+
+menubar = Menu(root)
+filemenu = Menu(menubar, tearoff=0)
+filemenu.add_command(label="Open", command=openfileR)
+filemenu.add_command(label="Save", command=openfileW)
+filemenu.add_separator()
+filemenu.add_command(label="Exit", command=root.quit)
+
+menubar.add_cascade(label="File", menu=filemenu)
+
+poopmenu = Menu(menubar, tearoff=0)
+poopmenu.add_command(label="Open", command=openfileR)
+poopmenu.add_command(label="Save", command=openfileW)
+poopmenu.add_separator()
+poopmenu.add_command(label="Exit", command=root.quit)
+
+menubar.add_cascade(label="Poop", menu=poopmenu)
+
+root.config(menu=menubar)
+
+
+
+
+
+
 
 
 

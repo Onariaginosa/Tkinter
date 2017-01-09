@@ -1,0 +1,12 @@
+Ona
+is
+a
+boss
+ass
+bitch
+hey
+I
+like
+to
+ear
+food
