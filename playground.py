@@ -21,6 +21,10 @@ def addtolist2(event):
         findsize()    
     entry1.delete(0,END)
 
+def clearlist2():
+    listbox1.delete(0, END)
+    findsize()
+
 def clearlist(event):
     listbox1.delete(0, END)
     findsize()
@@ -36,7 +40,13 @@ def findsize():
     label1.config(text=listbox1.size())
     
 def openfileR():
-    print "Open File r"
+    clearlist2()
+    f= open("Readme.txt", "r")
+    for name in f:
+        names = name[0:-1]
+        listbox1.insert(END, names)
+    findsize()
+    f.close()
 
 def openfileW():
     f = open("Readme.txt", 'w')
@@ -61,11 +71,14 @@ entry1.bind("<Return>", addtolist2)
 label1 = Label(root, text="don't be a little fucker", bg="pink", anchor=W)
 label1.grid(row=0, column=0, sticky=EW, columnspan=2)
 
-listbox1 = Listbox(root)
+scrollbar = Scrollbar(root, orient=VERTICAL)
+listbox1 = Listbox(root, yscrollcommandd=scrollbar.set)
+listbox1.config(command=listbox1.yview)
+scrollbar.grid(row=4, column=4, rowspan=10)
 listbox1.grid(row=4, column=0, columnspan=2, sticky=EW, rowspan=10)
 listbox1. bind("<Button-1>", clearlist)
 
-listbox1.insert(END, "Ona", "is", "a", "boss", "ass", "bitch")
+# listbox1.insert(END, "Ona", "is", "a", "boss", "ass", "bitch")
 
 findsize()
 
@@ -86,7 +99,7 @@ photo = ImageTk.PhotoImage(image)
 
 label2 = Label(image=photo)
 label2.image = photo # keep a reference!
-label2.grid(row=12, column=0)
+label2.grid(row=7, column=1)
 
 
 menubar = Menu(root)
